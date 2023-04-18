@@ -1,0 +1,22 @@
+My TV Show List draft
+
+General Description:
+	this application will help users keep track of their tv shows episodes and add ratings and comments about them
+
+User:
+	- can create an account
+	- firstly login in order to sync with other devices and than has access to all other features
+	- search & add tv show to personal list: "watching now" or "want to watch"
+	- can view these lists ordered by genre or personal rating
+	- mark episode as watched
+	- mark tv show as watched
+	- add a rating and a comment for every season/ tv show
+	- add a custom tv show
+	- every user has a profile with profile photo, description, chosen favourite tv show and favourite quote
+
+Developer:
+	- add new user
+	- add new tv show
+	- delete an account
+		
+
