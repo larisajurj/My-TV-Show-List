@@ -1,4 +1,5 @@
 #loginPane{
-    -fx-background-color: #ffdc95;
     -fx-background-size: 100%;
+    -fx-background-image: url('../Images/background4.jpg');
 }
+

@@ -21,6 +21,8 @@ public class Main extends Application{
             window = primaryStage;
             Parent layout1 = FXMLLoader.load(getClass().getClassLoader().getResource("view/LoginScene.fxml"));
             startingScene = new Scene(layout1);
+            Image icon = new Image("Images/icon.png");
+            window.getIcons().add(icon);
             String css = this.getClass().getClassLoader().getResource("css/Style.css").toExternalForm();
             startingScene.getStylesheets().add(css);
             window.setScene(startingScene);
