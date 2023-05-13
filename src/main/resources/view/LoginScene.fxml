@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane id="loginPane" minWidth="-Infinity" prefHeight="737.0" prefWidth="1422.0" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane id="loginPane" minWidth="-Infinity" prefHeight="737.0" prefWidth="1422.0" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <center>
       <VBox id="vbox" alignment="CENTER" minHeight="248.0" minWidth="500.0" prefHeight="248.0" prefWidth="513.0" stylesheets="@../css/Style.css" BorderPane.alignment="CENTER">
             <HBox prefHeight="49.0" prefWidth="778.0">
@@ -22,7 +17,7 @@
                      </font>
                   </Label>
             </HBox>
-            <TextField prefHeight="34.0" prefWidth="463.0" />
+            <TextField fx:id="UsernameField" prefHeight="34.0" prefWidth="463.0" />
             <HBox layoutX="10.0" layoutY="434.0" prefHeight="46.0" prefWidth="850.0">
                   <Label prefHeight="46.0" prefWidth="150.0" text="Password:">
                      <font>
@@ -30,7 +25,7 @@
                      </font>
                   </Label>
             </HBox>
-            <PasswordField minHeight="36.0" minWidth="474.0" prefHeight="36.0" prefWidth="474.0" />
+            <PasswordField fx:id="PasswordField" minHeight="36.0" minWidth="474.0" prefHeight="36.0" prefWidth="474.0" />
          <BorderPane.margin>
             <Insets left="150.0" right="150.0" />
          </BorderPane.margin>
@@ -57,7 +52,7 @@
    </top>
    <bottom>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="61.0" prefWidth="290.0" text="Log in">
+            <Button id="LoginButton" alignment="CENTER" mnemonicParsing="false" onAction="#LoginSuccessfully" prefHeight="61.0" prefWidth="290.0" text="Log in">
                <font>
                   <Font size="24.0" />
                </font>
