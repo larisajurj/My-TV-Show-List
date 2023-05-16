@@ -33,7 +33,7 @@ public class LoginController {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("wrong pass");
+            System.out.println("Wrong password");
         }
     }
 }
