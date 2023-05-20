@@ -4,9 +4,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import utilities.CSVReader;
-
-import java.io.BufferedReader;
 
 public class Main extends Application{
     Stage window;
@@ -33,9 +30,6 @@ public class Main extends Application{
         }catch(Exception e){
             e.printStackTrace();
         }
-        CSVReader reader = new CSVReader("src/main/resources/databases/tv_shows.csv");
-        //FileReader test = new FileReader("resources/databases/tv_shows.csv")
-        reader.Read();
     }
 
 }

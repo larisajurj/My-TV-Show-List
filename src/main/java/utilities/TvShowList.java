@@ -1,75 +1,49 @@
 package utilities;
 
 public class TvShowList {
-    private String index;
-    private String type;
-    private String name;
-    private String cast;
-    private String country;
-    private String date_added;
-    private String release;
-    private String rating;
-    private String duration;
-    private String listed_in;
-    private String description;
+    private Integer id;
+    private String title, year, runtime, rating, genre, text;
 
-    public TvShowList() {
+    public TvShowList(Integer id, String title, String year, String runtime, String rating, String genre, String text) {
+        this.id = id;
+        this.title = title;
+        this.year = year;
+        this.runtime = runtime;
+        this.rating = rating;
+        this.genre = genre;
+        this.text = text;
     }
 
-    public String getIndex() {
-        return index;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIndex(String index) {
-        this.index = index;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getTitle() {
+        return title;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getName() {
-        return name;
+    public String getYear() {
+        return year;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setYear(String year) {
+        this.year = year;
     }
 
-    public String getCast() {
-        return cast;
+    public String getRuntime() {
+        return runtime;
     }
 
-    public void setCast(String cast) {
-        this.cast = cast;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getDate_added() {
-        return date_added;
-    }
-
-    public void setDate_added(String date_added) {
-        this.date_added = date_added;
-    }
-
-    public String getRelease() {
-        return release;
-    }
-
-    public void setRelease(String release) {
-        this.release = release;
+    public void setRuntime(String runtime) {
+        this.runtime = runtime;
     }
 
     public String getRating() {
@@ -80,27 +54,19 @@ public class TvShowList {
         this.rating = rating;
     }
 
-    public String getDuration() {
-        return duration;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
-    public String getListed_in() {
-        return listed_in;
+    public String getText() {
+        return text;
     }
 
-    public void setListed_in(String listed_in) {
-        this.listed_in = listed_in;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setText(String text) {
+        this.text = text;
     }
 }
