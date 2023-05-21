@@ -1,25 +1,15 @@
 package utilities;
 
 public class TvShowList {
-    private Integer id;
     private String title, year, runtime, rating, genre, text;
 
-    public TvShowList(Integer id, String title, String year, String runtime, String rating, String genre, String text) {
-        this.id = id;
+    public TvShowList(String title, String year, String runtime, String rating, String genre, String text) {
         this.title = title;
         this.year = year;
         this.runtime = runtime;
         this.rating = rating;
         this.genre = genre;
         this.text = text;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getTitle() {

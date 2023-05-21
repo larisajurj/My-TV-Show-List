@@ -89,14 +89,14 @@
             </HBox>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <TableView fixedCellSize="1.0" prefHeight="587.0" prefWidth="1087.0">
+                  <TableView fx:id="table_list" fixedCellSize="1.0" prefHeight="587.0" prefWidth="1087.0">
                     <columns>
-                      <TableColumn fx:id="title" prefWidth="75.0" text="Title" />
-                      <TableColumn fx:id="year" prefWidth="75.0" text="Year" />
-                        <TableColumn fx:id="runtime" prefWidth="75.0" text="Runtime" />
-                        <TableColumn fx:id="rating" prefWidth="75.0" text="Rating" />
-                        <TableColumn fx:id="genre" prefWidth="75.0" text="Genre" />
-                        <TableColumn fx:id="description" prefWidth="169.60003662109375" text="Description" />
+                      <TableColumn fx:id="col_title" prefWidth="75.0" text="Title" />
+                      <TableColumn fx:id="col_year" prefWidth="75.0" text="Year" />
+                        <TableColumn fx:id="col_runtime" prefWidth="75.0" text="Runtime" />
+                        <TableColumn fx:id="col_rating" prefWidth="75.0" text="Rating" />
+                        <TableColumn fx:id="col_genre" prefWidth="75.0" text="Genre" />
+                        <TableColumn fx:id="col_description" prefWidth="75.0" text="Description" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

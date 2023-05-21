@@ -1,5 +1,8 @@
 package controllers;
 
+import javafx.beans.InvalidationListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,7 +23,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class WantToWatchSceneController implements Initializable {
     private Stage stage;
@@ -28,20 +31,17 @@ public class WantToWatchSceneController implements Initializable {
     @FXML
     private TableView<TvShowList> table_list;
     @FXML
-    private TableColumn<TvShowList, Integer> id;
+    private TableColumn<TvShowList, String> col_title;
     @FXML
-    private TableColumn<TvShowList, String> title;
+    private TableColumn<TvShowList, String> col_year;
     @FXML
-    private TableColumn<TvShowList, String> year;
+    private TableColumn<TvShowList, String> col_runtime;
     @FXML
-    private TableColumn<TvShowList, String> runtime;
+    private TableColumn<TvShowList, String> col_rating;
     @FXML
-    private TableColumn<TvShowList, String> rating;
+    private TableColumn<TvShowList, String> col_genre;
     @FXML
-    private TableColumn<TvShowList, String> genre;
-    @FXML
-    private TableColumn<TvShowList, String> description;
-    ObservableList<TvShowList> listM;
+    private TableColumn<TvShowList, String> col_description;
     int index = -1;
     Connection conn = null;
     ResultSet rs = null;
@@ -64,14 +64,19 @@ public class WantToWatchSceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        id.setCellValueFactory(new PropertyValueFactory<TvShowList, Integer>("id"));
-        title.setCellValueFactory(new PropertyValueFactory<TvShowList, String>("title"));
-        year.setCellValueFactory(new PropertyValueFactory<TvShowList, String>("year"));
-        runtime.setCellValueFactory(new PropertyValueFactory<TvShowList, String>("runtime"));
-        rating.setCellValueFactory(new PropertyValueFactory<TvShowList, String>("rating"));
-        genre.setCellValueFactory(new PropertyValueFactory<TvShowList, String>("genre"));
-        description.setCellValueFactory(new PropertyValueFactory<TvShowList, String>("text"));
-        listM = MySqlConnect.getDataShows();
+        //listM = MySqlConnect.getDataShows();
+        ObservableList<TvShowList> listM= FXCollections.observableArrayList(new TvShowList("title1", "2002", "1", "10", "comedy", "bla la"),
+                new TvShowList("title2", "2002", "1", "10", "comedy", "bla la"),
+                new TvShowList("title3", "2002", "1", "10", "comedy", "bla la"),
+                new TvShowList("title4", "2002", "1", "10", "comedy", "bla la"),
+                new TvShowList("title5", "2002", "1", "10", "comedy", "bla la"),
+                new TvShowList("title6", "2002", "1", "10", "comedy", "bla la"));
+        col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
+        col_year.setCellValueFactory(new PropertyValueFactory<>("year"));
+        col_runtime.setCellValueFactory(new PropertyValueFactory<>("runtime"));
+        col_rating.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        col_genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
+        col_description.setCellValueFactory(new PropertyValueFactory<>("text"));
         table_list.setItems(listM);
     }
 }
