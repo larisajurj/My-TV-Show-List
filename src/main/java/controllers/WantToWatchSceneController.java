@@ -1,8 +1,6 @@
 package controllers;
 
-import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,11 +40,10 @@ public class WantToWatchSceneController implements Initializable {
     private TableColumn<TvShowList, String> col_genre;
     @FXML
     private TableColumn<TvShowList, String> col_description;
-    int index = -1;
-    Connection conn = null;
-    ResultSet rs = null;
-    PreparedStatement pst = null;
-
+    //int index = -1;
+    //Connection conn = null;
+    //ResultSet rs = null;
+    //PreparedStatement pst = null;
 
     public void goToWatchedScene(ActionEvent event) {
         try {
@@ -62,15 +59,11 @@ public class WantToWatchSceneController implements Initializable {
         }
     }
 
-    @Override
+    /*@Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //listM = MySqlConnect.getDataShows();
-        ObservableList<TvShowList> listM= FXCollections.observableArrayList(new TvShowList("title1", "2002", "1", "10", "comedy", "bla la"),
-                new TvShowList("title2", "2002", "1", "10", "comedy", "bla la"),
-                new TvShowList("title3", "2002", "1", "10", "comedy", "bla la"),
-                new TvShowList("title4", "2002", "1", "10", "comedy", "bla la"),
-                new TvShowList("title5", "2002", "1", "10", "comedy", "bla la"),
-                new TvShowList("title6", "2002", "1", "10", "comedy", "bla la"));
+        //ObservableList<TvShowList> listM= FXCollections.observableArrayList(new TvShowList("title1", "2002", "1", "10", "comedy", "bla la"));
+
         col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
         col_year.setCellValueFactory(new PropertyValueFactory<>("year"));
         col_runtime.setCellValueFactory(new PropertyValueFactory<>("runtime"));
@@ -78,5 +71,21 @@ public class WantToWatchSceneController implements Initializable {
         col_genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
         col_description.setCellValueFactory(new PropertyValueFactory<>("text"));
         table_list.setItems(listM);
+
+    }*/
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        MySqlConnect msc = new MySqlConnect();
+        ObservableList<TvShowList> listM = MySqlConnect.getWantToWatchData("nume");
+        col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
+        col_year.setCellValueFactory(new PropertyValueFactory<>("year"));
+        col_runtime.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        col_rating.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        col_genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
+        col_description.setCellValueFactory(new PropertyValueFactory<>("text"));
+       // msc.addToWantToWatch("nume", 3);
+
+        table_list.setItems(listM);
     }
+
 }
