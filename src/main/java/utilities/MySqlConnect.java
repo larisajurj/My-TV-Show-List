@@ -50,7 +50,35 @@ public class MySqlConnect {
             e.printStackTrace();
         }
         return list;
-    }/*
+    }
+    public static void insertUserInfo(String username, String password, String favoriteQuote) {
+        Connection conn = ConnectDb();
+        try {
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO user_table (user, password, favQuote, profilePic) VALUES (?, ?, ?)");
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ps.setString(3, favoriteQuote);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "User information inserted successfully!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static ObservableList<UserNameList> getUserInfo() {
+        Connection conn = ConnectDb();
+        ObservableList<UserNameList> list = FXCollections.observableArrayList();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT user, password, favQuote, profilePic FROM user_table");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new UserNameList(rs.getString("user"), rs.getString("password"), rs.getString("favQuote"), rs.getInt("profilePic")));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+    /*
     public void addToWantToWatch(String user, Integer MovieID){
         try {
             Connection conn = ConnectDb(); // Establish a connection to the database
