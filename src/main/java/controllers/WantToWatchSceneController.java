@@ -76,7 +76,7 @@ public class WantToWatchSceneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         MySqlConnect msc = new MySqlConnect();
-        ObservableList<TvShowList> listM = MySqlConnect.getWantToWatchData("nume");
+        ObservableList<TvShowList> listM = MySqlConnect.getDataShows();
         col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
         col_year.setCellValueFactory(new PropertyValueFactory<>("year"));
         col_runtime.setCellValueFactory(new PropertyValueFactory<>("duration"));
