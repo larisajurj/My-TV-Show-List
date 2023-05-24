@@ -36,6 +36,11 @@
                <Font size="18.0" />
             </font>
          </Label>
+         <Label fx:id="userLabel" textFill="RED">
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Label>
          <BorderPane.margin>
             <Insets left="150.0" right="150.0" />
          </BorderPane.margin>
