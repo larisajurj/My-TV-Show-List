@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<SplitPane dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="737.0" prefWidth="1422.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WantToWatchSceneController">
+  <items>
+      <VBox alignment="TOP_CENTER" prefHeight="737.0" prefWidth="344.0" spacing="10">
+         <children>
+            <ImageView fitHeight="217.0" fitWidth="207.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/icon.png" />
+               </image>
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </ImageView>
+            <Label text="\@username">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label alignment="BOTTOM_LEFT" prefHeight="55.0" prefWidth="322.0" text="Favourite quote:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_CENTER" prefHeight="106.0" prefWidth="322.0" text="Perfectly balanced, as all things should be" textOverrun="CLIP" wrapText="true">
+               <font>
+                  <Font name="System Italic" size="24.0" />
+               </font>
+            </Label>
+            <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#goToWatchedScene" prefHeight="57.0" prefWidth="275.0" text="Watched" textAlignment="JUSTIFY">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" prefHeight="48.0" prefWidth="275.0" text="Want to watch" textAlignment="JUSTIFY">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Button>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></VBox>
+      <SplitPane dividerPositions="0.15, 0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+        <items>
+            <Pane maxHeight="120.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="98.0" prefWidth="1013.0" text="Want to watch!" textFill="#faea5f">
+                     <font>
+                        <Font name="Harlow Solid Italic" size="58.0" />
+                     </font>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </Label>
+               </children>
+            </Pane>
+            <HBox maxHeight="20.0" prefHeight="10.0" prefWidth="1015.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="102.0" text="+" />
+                  <SplitMenuButton mnemonicParsing="false" prefHeight="51.0" prefWidth="165.0" text="Sort by:">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </SplitMenuButton>
+                  <Label prefHeight="69.0" prefWidth="84.0" />
+               </children>
+            </HBox>
+            <TableView fx:id="table_list" prefHeight="481.0" prefWidth="1062.0">
+              <columns>
+                <TableColumn fx:id="col_title" prefWidth="75.0" text="title" />
+                <TableColumn fx:id="col_year" prefWidth="75.0" text="year" />
+                  <TableColumn fx:id="col_runtime" prefWidth="75.0" text="runtime" />
+                  <TableColumn fx:id="col_rating" prefWidth="75.0" text="rating" />
+                  <TableColumn fx:id="col_genre" prefWidth="75.0" text="genre" />
+                  <TableColumn fx:id="col_description" prefWidth="75.0" text="text" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+        </items>
+      </SplitPane>
+  </items>
+</SplitPane>
