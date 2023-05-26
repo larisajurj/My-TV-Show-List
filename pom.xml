@@ -13,6 +13,14 @@
         <javafx.version>21-ea+5</javafx.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>gluonhq</id>
+            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases</url>
+        </repository>
+    </repositories>
+
+
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -37,16 +45,26 @@
             <artifactId>javafx-base</artifactId>
             <version>${javafx.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>${javafx.version}</version>
         </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.gluonhq/charm-glisten -->
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>charm-glisten</artifactId>
+            <version>6.2.3</version>
+        </dependency>
+
     </dependencies>
 
     <build>
