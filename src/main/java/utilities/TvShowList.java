@@ -1,5 +1,7 @@
 package utilities;
 
+import javafx.scene.control.Button;
+
 public class TvShowList {
     private String title;
     private String year;
@@ -7,6 +9,7 @@ public class TvShowList {
     private String rating;
     private String genre;
     private String text;
+    private Button add_to_watched;
 
     public TvShowList(String title, String year, String duration, String rating, String genre, String text) {
         this.title = title;

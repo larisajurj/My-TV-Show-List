@@ -28,7 +28,7 @@
                   <Insets top="50.0" />
                </VBox.margin>
             </ImageView>
-            <Label text="\@username">
+            <Label text="\@username" fx:id="usernameLabel">
                <font>
                   <Font size="23.0" />
                </font>
@@ -73,7 +73,7 @@
             </Pane>
             <HBox maxHeight="20.0" prefHeight="10.0" prefWidth="1015.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="102.0" text="+" />
+                  <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="102.0" text="+" fx:id="plusButton"/>
                   <SplitMenuButton mnemonicParsing="false" prefHeight="51.0" prefWidth="165.0" text="Sort by:">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Action 1" />
@@ -94,6 +94,9 @@
                   <TableColumn fx:id="col_rating" prefWidth="75.0" text="rating" />
                   <TableColumn fx:id="col_genre" prefWidth="75.0" text="genre" />
                   <TableColumn fx:id="col_description" prefWidth="75.0" text="text" />
+
+
+
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

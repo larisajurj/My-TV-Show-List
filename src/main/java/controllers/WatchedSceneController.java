@@ -1,18 +1,30 @@
 package controllers;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class WatchedSceneController {
     private Stage stage;
     private Scene scene;
+    @FXML
+    private Label usernameLabel;
+
+    public void displayUsername(String username){
+        usernameLabel.setText(username);
+
+    }
     public void goToWantToWatchScene(ActionEvent event) {
         try {
-            Parent layout = FXMLLoader.load(getClass().getClassLoader().getResource("view/WantToWatchScene.fxml"));
+            FXMLLoader loaderWatched = new FXMLLoader(getClass().getClassLoader().getResource("view/WantToWatchScene.fxml"));
+            Parent layout = loaderWatched.load();
+            WantToWatchSceneController wantToWatchSceneController =loaderWatched.getController();
+            wantToWatchSceneController.displayUsername(usernameLabel.getText());
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(layout);
             String css = this.getClass().getClassLoader().getResource("css/Style.css").toExternalForm();

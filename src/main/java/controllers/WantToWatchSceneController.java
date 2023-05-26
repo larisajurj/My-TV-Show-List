@@ -9,6 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -40,14 +42,21 @@ public class WantToWatchSceneController implements Initializable {
     private TableColumn<TvShowList, String> col_genre;
     @FXML
     private TableColumn<TvShowList, String> col_description;
-    //int index = -1;
-    //Connection conn = null;
-    //ResultSet rs = null;
-    //PreparedStatement pst = null;
+    @FXML
+    private Button plusButton;
+    @FXML
+    private Label usernameLabel;
 
+    public void displayUsername(String username){
+        usernameLabel.setText(username);
+
+    }
     public void goToWatchedScene(ActionEvent event) {
         try {
-            Parent layout = FXMLLoader.load(getClass().getClassLoader().getResource("view/WatchedScene.fxml"));
+            FXMLLoader loaderWatched = new FXMLLoader(getClass().getClassLoader().getResource("view/WatchedScene.fxml"));
+            Parent layout = loaderWatched.load();
+            WatchedSceneController watchedSceneController =loaderWatched.getController();
+            watchedSceneController.displayUsername(usernameLabel.getText());
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(layout);
             String css = this.getClass().getClassLoader().getResource("css/Style.css").toExternalForm();
@@ -58,21 +67,9 @@ public class WantToWatchSceneController implements Initializable {
             e.printStackTrace();
         }
     }
+    public void addButton(ActionEvent event){
 
-    /*@Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        //listM = MySqlConnect.getDataShows();
-        //ObservableList<TvShowList> listM= FXCollections.observableArrayList(new TvShowList("title1", "2002", "1", "10", "comedy", "bla la"));
-
-        col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
-        col_year.setCellValueFactory(new PropertyValueFactory<>("year"));
-        col_runtime.setCellValueFactory(new PropertyValueFactory<>("runtime"));
-        col_rating.setCellValueFactory(new PropertyValueFactory<>("rating"));
-        col_genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
-        col_description.setCellValueFactory(new PropertyValueFactory<>("text"));
-        table_list.setItems(listM);
-
-    }*/
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         MySqlConnect msc = new MySqlConnect();
@@ -83,8 +80,15 @@ public class WantToWatchSceneController implements Initializable {
         col_rating.setCellValueFactory(new PropertyValueFactory<>("rating"));
         col_genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
         col_description.setCellValueFactory(new PropertyValueFactory<>("text"));
-       // msc.addToWantToWatch("nume", 3);
-
+        /*plusButton.setOnAction(event -> {
+            TvShowList selectedMovie = table_list.getSelectionModel().getSelectedItem();
+            if (selectedMovie != null) {
+                System.out.println("Selected Movie: " + selectedMovie.getTitle());
+                msc.addToWantToWatch("nume", selectedMovie.getTitle() );
+            } else {
+                System.out.println("No movie selected.");
+            }
+        });*/
         table_list.setItems(listM);
     }
 
