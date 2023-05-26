@@ -7,49 +7,52 @@ import javax.swing.*;
 import java.sql.*;
 
 public class MySqlConnect {
-    public static Connection ConnectDb(){
-        try{
+    public static Connection ConnectDb() {
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/tvshowdb","root","");
-            JOptionPane.showMessageDialog(null, "ConnectionEstablished");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/tvshowdb", "root", "");
+            //JOptionPane.showMessageDialog(null, "ConnectionEstablished");
             return conn;
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
             return null;
         }
     }
-    public static ObservableList<TvShowList> getDataShows(){
+
+    public static ObservableList<TvShowList> getDataShows() {
         Connection conn = ConnectDb();
         ObservableList<TvShowList> list = FXCollections.observableArrayList();
-        try{
+        try {
             PreparedStatement ps = conn.prepareStatement("select title, year, runtime, rating, genre, text from list");
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 list.add(new TvShowList(rs.getString("title"), rs.getString("year"),
                         rs.getString("runtime"), rs.getString("rating"), rs.getString("genre"), rs.getString("text")));
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
     }
-    public static ObservableList<TvShowList> getWantToWatchData(String user){
+
+    public static ObservableList<TvShowList> getWantToWatchData(String user) {
         Connection conn = ConnectDb();
         ObservableList<TvShowList> list = FXCollections.observableArrayList();
-        try{
+        try {
             PreparedStatement ps = conn.prepareStatement("select title, year, runtime, rating, genre, text from want_to_watch where user = ?");
             ps.setString(1, user);
 
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 list.add(new TvShowList(rs.getString("title"), rs.getString("year"),
                         rs.getString("runtime"), rs.getString("rating"), rs.getString("genre"), rs.getString("text")));
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
     }
+
     public static void insertUserInfo(String username, String password, String favoriteQuote) {
         Connection conn = ConnectDb();
         try {
@@ -63,6 +66,7 @@ public class MySqlConnect {
             e.printStackTrace();
         }
     }
+
     public static ObservableList<UserNameList> getUserInfo() {
         Connection conn = ConnectDb();
         ObservableList<UserNameList> list = FXCollections.observableArrayList();
@@ -78,7 +82,7 @@ public class MySqlConnect {
         return list;
     }
 
-    public void addToWantToWatch(String user, String MovieToSearch){
+    public String addToWantToWatch(String user, String MovieToSearch) {
         try {
             Connection conn = ConnectDb(); // Establish a connection to the database
 
@@ -97,9 +101,8 @@ public class MySqlConnect {
             boolean idExists = rs.next();
 
             if (idExists) {
-                System.out.println(MovieToSearch + "was already added!");
+                return MovieToSearch + "was already added!";
             } else {
-                System.out.println("ID does not exist in the table");
 
                 PreparedStatement ps3 = conn.prepareStatement("select * from list where title = ?");
                 ps3.setString(1, MovieToSearch);
@@ -115,7 +118,7 @@ public class MySqlConnect {
                     String rs_genre = resultSet.getString("genre");
                     String rs_text = resultSet.getString("text");// ...
 
-                    String selectIdQuery = "SELECT LAST_INSERT_ID()";
+                    String selectIdQuery = "SELECT MAX(id) FROM want_to_watch";
                     Statement statement = conn.createStatement();
                     ResultSet rs2 = statement.executeQuery(selectIdQuery);
                     int lastInsertedId = 0;
@@ -126,24 +129,56 @@ public class MySqlConnect {
                     // Define the SQL query to insert the row into the destination table
                     PreparedStatement ps2 = conn.prepareStatement("INSERT INTO want_to_watch (id, title, year, runtime, rating, genre, text, user) VALUES (?,?,?,?,?,?,?,?)");
                     // Execute the insert query
-                    ps2.setInt(1, lastInsertedId+1);
-                    ps2.setString(2,rs_title);
-                    ps2.setString(3,rs_year);
-                    ps2.setString(4,rs_runtime);
-                    ps2.setString(5,rs_rating);
-                    ps2.setString(6,rs_genre);
-                    ps2.setString(7,rs_text);
-                    ps2.setString(8,user);
+                    ps2.setInt(1, lastInsertedId + 1);
+                    ps2.setString(2, rs_title);
+                    ps2.setString(3, rs_year);
+                    ps2.setString(4, rs_runtime);
+                    ps2.setString(5, rs_rating);
+                    ps2.setString(6, rs_genre);
+                    ps2.setString(7, rs_text);
+                    ps2.setString(8, user);
                     ps2.executeUpdate();
                 }
 
             }
 
-
-                System.out.println("Row inserted successfully!");
+            return MovieToSearch + " added!";
         } catch (Exception e) {
             e.printStackTrace();
         }
+    return null;
+    }
 
+    public String getActiveSession() {
+        Connection conn = ConnectDb();
+        try {
+            PreparedStatement ps = conn.prepareStatement("Select username from active_session");
+            ResultSet resultSet = ps.executeQuery();
+            // Iterate over the result set
+            while (resultSet.next()) {
+                // Retrieve the column values from the result set
+                return resultSet.getString("username");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void setActiveSession(String username) {
+        Connection conn = ConnectDb();
+        String query = "TRUNCATE TABLE active_session";
+
+        try {
+            Statement statement = conn.createStatement();
+            statement.executeUpdate(query);
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO active_session (id, username) VALUES (?, ?)");
+            ps.setInt(1, 1);
+            ps.setString(2, username);
+            ps.executeUpdate();
+            //JOptionPane.showMessageDialog(null, "User information inserted successfully!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

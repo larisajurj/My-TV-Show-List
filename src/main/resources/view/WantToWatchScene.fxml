@@ -20,7 +20,7 @@
   <items>
       <VBox alignment="TOP_CENTER" prefHeight="737.0" prefWidth="344.0" spacing="10">
          <children>
-            <ImageView fitHeight="217.0" fitWidth="207.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="avatar" fitHeight="217.0" fitWidth="207.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/icon.png" />
                </image>
@@ -28,7 +28,7 @@
                   <Insets top="50.0" />
                </VBox.margin>
             </ImageView>
-            <Label text="\@username" fx:id="usernameLabel">
+            <Label fx:id="usernameLabel" text="\@username">
                <font>
                   <Font size="23.0" />
                </font>
@@ -38,7 +38,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label alignment="TOP_CENTER" prefHeight="106.0" prefWidth="322.0" text="Perfectly balanced, as all things should be" textOverrun="CLIP" wrapText="true">
+            <Label fx:id="quote" alignment="TOP_CENTER" prefHeight="106.0" prefWidth="322.0" text="Perfectly balanced, as all things should be" textOverrun="CLIP" wrapText="true">
                <font>
                   <Font name="System Italic" size="24.0" />
                </font>
@@ -73,34 +73,20 @@
             </Pane>
             <HBox maxHeight="20.0" prefHeight="10.0" prefWidth="1015.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="102.0" text="+" fx:id="plusButton"/>
-                  <SplitMenuButton mnemonicParsing="false" prefHeight="51.0" prefWidth="165.0" text="Sort by:">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
-                    </items>
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </SplitMenuButton>
+                  <Button fx:id="plusButton" mnemonicParsing="false" onAction="#plusButton" prefHeight="66.0" prefWidth="102.0" text="+" />
                   <Label prefHeight="69.0" prefWidth="84.0" />
                </children>
             </HBox>
             <TableView fx:id="table_list" prefHeight="481.0" prefWidth="1062.0">
               <columns>
-                <TableColumn fx:id="col_title" prefWidth="75.0" text="title" />
-                <TableColumn fx:id="col_year" prefWidth="75.0" text="year" />
-                  <TableColumn fx:id="col_runtime" prefWidth="75.0" text="runtime" />
-                  <TableColumn fx:id="col_rating" prefWidth="75.0" text="rating" />
-                  <TableColumn fx:id="col_genre" prefWidth="75.0" text="genre" />
-                  <TableColumn fx:id="col_description" prefWidth="75.0" text="text" />
-
-
+                <TableColumn fx:id="col_title" prefWidth="267.99998779296857" text="title" />
+                <TableColumn fx:id="col_year" prefWidth="77.5999755859375" text="year" />
+                  <TableColumn fx:id="col_runtime" prefWidth="75.99996948242188" text="runtime" />
+                  <TableColumn fx:id="col_rating" prefWidth="69.5999755859375" text="rating" />
+                  <TableColumn fx:id="col_genre" prefWidth="116.0" text="genre" />
+                  <TableColumn fx:id="col_description" prefWidth="457.60003662109375" text="description" />
 
               </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
             </TableView>
         </items>
       </SplitPane>

@@ -15,16 +15,10 @@ public class WatchedSceneController {
     @FXML
     private Label usernameLabel;
 
-    public void displayUsername(String username){
-        usernameLabel.setText(username);
-
-    }
     public void goToWantToWatchScene(ActionEvent event) {
         try {
             FXMLLoader loaderWatched = new FXMLLoader(getClass().getClassLoader().getResource("view/WantToWatchScene.fxml"));
             Parent layout = loaderWatched.load();
-            WantToWatchSceneController wantToWatchSceneController =loaderWatched.getController();
-            wantToWatchSceneController.displayUsername(usernameLabel.getText());
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(layout);
             String css = this.getClass().getClassLoader().getResource("css/Style.css").toExternalForm();

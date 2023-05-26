@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,13 +12,14 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utilities.MySqlConnect;
 import utilities.UserNameList;
+import utilities.UserSession;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginController {
-
+public class LoginController{
+    private MySqlConnect msc;
     public TextField UsernameField;
     public TextField PasswordField;
     private Stage stage;
@@ -36,12 +38,12 @@ public class LoginController {
         for (UserNameList user : userList) {
             if (user.getUsername().equals(enteredUsername) && user.getPassword().equals(enteredPassword)) {
                 try {
+                    MySqlConnect msc = new MySqlConnect();
+                    msc.setActiveSession(enteredUsername);
                     // Load the default scene
+
                     FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/DefaultScene.fxml"));
                     layout = loader.load();
-
-                    DefaultSceneController defaultSceneController = loader.getController();
-                    defaultSceneController.displayUsername(enteredUsername);
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     scene = new Scene(layout);
                     String css = this.getClass().getClassLoader().getResource("css/Style.css").toExternalForm();
@@ -58,4 +60,5 @@ public class LoginController {
         // If the login is not successful
         System.out.println("Wrong username or password");
     }
+
 }

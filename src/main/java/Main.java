@@ -18,8 +18,6 @@ public class Main extends Application{
         try {
             window = primaryStage;
             Parent layout1 = FXMLLoader.load(getClass().getClassLoader().getResource("view/LoginScene.fxml"));
-            //FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/LoginScene.fxml"));
-            //Parent layout1 = loader.load();
             startingScene = new Scene(layout1);
             Image icon = new Image("images/icon.png");
             window.getIcons().add(icon);
