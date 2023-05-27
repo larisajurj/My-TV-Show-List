@@ -1,10 +1,9 @@
-package utilities;
+package java.utilities;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import utilities.MySqlConnect;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,12 +33,10 @@ public class MySqlConnectTest {
 
     @Test
     public void testInsertUserInfo() {
-        byte[] array = new byte[7]; // length is bounded by 7
-        new Random().nextBytes(array);
-        String random = new String(array, StandardCharsets.UTF_8);
-        mySqlConnect.insertUserInfo(random, "password", "quote", "1");
+        Random random = new Random();
+        mySqlConnect.insertUserInfo(random.toString(), "password", "quote", "1");
         // Assert the insertion by checking if the username exists in the user_table
-        assertTrue(mySqlConnect.checkUsername(random));
+        assertTrue(mySqlConnect.checkUsername("username"));
     }
 
     @Test
