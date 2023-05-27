@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.w3c.dom.Text;
 import utilities.MySqlConnect;
 import utilities.TvShowList;
 
@@ -39,9 +40,11 @@ public class WantToWatchSceneController implements Initializable {
     @FXML
     private Label usernameLabel;
     private MySqlConnect msc;
-    private String genre = "";
     private FilteredList<TvShowList> filteredData;
-
+    @FXML
+    private TextField genreTextField;
+    @FXML
+    private TextField titleTextField;
     public void goToWatchedScene(ActionEvent event) {
         try {
             FXMLLoader loaderWatched = new FXMLLoader(getClass().getClassLoader().getResource("view/WatchedScene.fxml"));
@@ -85,8 +88,37 @@ public class WantToWatchSceneController implements Initializable {
         col_genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
         col_description.setCellValueFactory(new PropertyValueFactory<>("text"));
         table_list.setItems(listM);
-        // Add a listener to the search field text property
+        ObservableList<TvShowList> dataList = table_list.getItems();
+        filteredData = new FilteredList<>(dataList, p -> true);
 
+        // Bind the filtered data to the table view
+        table_list.setItems(filteredData);
+
+        // Add a listener to the search field text property
+       titleTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(tvShow -> {
+                // If search field is empty, show all items
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare the title with the search query (case-insensitive)
+                String lowerCaseQuery = newValue.toLowerCase();
+                return tvShow.getTitle().toLowerCase().contains(lowerCaseQuery);
+            });
+        });
+        genreTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(tvShow -> {
+                // If search field is empty, show all items
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare the title with the search query (case-insensitive)
+                String lowerCaseQuery = newValue.toLowerCase();
+                return tvShow.getGenre().toLowerCase().contains(lowerCaseQuery);
+            });
+        });
     }
 
 }
