@@ -1,25 +1,18 @@
 package controllers;
 
 import javafx.scene.Parent;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utilities.EncryptPassword;
 import utilities.MySqlConnect;
-import utilities.UserNameList;
 
-import javax.swing.*;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 public class SignUpController {
     public TextField UsernameField;
@@ -40,39 +33,27 @@ public class SignUpController {
         String confirmPassword = ConfirmPasswordField.getText();
         String enteredFavQuote = FavoriteQuoteField.getText();
         String encryptedPassword = encryptPassword.encrypt(enteredPassword);
+        boolean canCreateAccount = true;
 
         MySqlConnect msc = new MySqlConnect();
-        ObservableList<UserNameList> userList = MySqlConnect.getUserInfo();
 
-        for(UserNameList user : userList) {
-            if(user.getUsername().equals(enteredUsername)) {
-                accountLabel.setText("Username is taken!");
+        if (UsernameField.getText().isBlank() || PasswordField.getText().isBlank() || ConfirmPasswordField.getText().isBlank()) {
+            accountLabel.setText("One of the fields are empty!");
+        }
+        if (msc.checkUsername(enteredUsername)) {
+            accountLabel.setText("Username is taken!");
+            canCreateAccount = false;
+            return;
+        } else {
+            if (!enteredPassword.equals(confirmPassword)) {
+                accountLabel.setText("Passwords are not the same. Try again!");
+                canCreateAccount = false;
                 return;
             }
-            else {
-                if(!enteredPassword.equals(confirmPassword)) {
-                    accountLabel.setText("Passwords are not the same. Try again!");
-                    return;
-                }
-                else {
-                    try {
-                        Connection conn = MySqlConnect.ConnectDb();
-                        PreparedStatement ps = conn.prepareStatement("INSERT INTO user_table (user, password, favQuote, profilePic) VALUES (?, ?, ?, ?)");
-                        ps.setString(1, enteredUsername);
-                        ps.setString(2, encryptedPassword);
-                        ps.setString(3, enteredFavQuote);
-                        ps.setString(4, Integer.valueOf(profilePicture).toString());
-                        ps.executeUpdate();
-                        System.out.println(encryptedPassword);
-
-
-                        accountLabel.setText("Account created! Go back and log in.");
-                    } catch (SQLException sqlException) {
-                        sqlException.printStackTrace();
-                        System.out.println(sqlException.getMessage());
-                    }
-                }
-            }
+        }
+        if (canCreateAccount) {
+            msc.insertUserInfo(enteredUsername, encryptedPassword, enteredFavQuote, profilePicture);
+            accountLabel.setText("Account created! Go back and log in.");
         }
     }
 
