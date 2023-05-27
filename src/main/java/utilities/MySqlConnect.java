@@ -456,4 +456,72 @@ public class MySqlConnect {
         }
         return null;
     }
+    public String addToWatchedFromWantToWatch(String user, String MovieToSearch) {
+        try {
+            Connection conn = ConnectDb(); // Establish a connection to the database
+
+            String query = "SELECT * FROM watched WHERE title = ? and user= ?";
+
+            // Create a PreparedStatement object
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            // Set the parameter value for the ID
+            ps.setString(1, MovieToSearch);
+            ps.setString(2, user);
+
+
+            // Execute the SELECT query
+            ResultSet rs = ps.executeQuery();
+
+            // Check if any result is returned
+            boolean idExists = rs.next();
+
+            if (idExists) {
+                return MovieToSearch +  " was already added!";
+            } else {
+
+                PreparedStatement ps3 = conn.prepareStatement("select * from want_to_watch where title = ?");
+                ps3.setString(1, MovieToSearch);
+
+                ResultSet resultSet = ps3.executeQuery();
+                // Iterate over the result set
+                while (resultSet.next()) {
+                    // Retrieve the column values from the result set
+                    String rs_title = resultSet.getString("title");
+                    String rs_year = resultSet.getString("year");
+                    String rs_runtime = resultSet.getString("runtime");
+                    String rs_rating = resultSet.getString("rating");
+                    String rs_genre = resultSet.getString("genre");
+                    String rs_text = resultSet.getString("text");// ...
+
+                    String selectIdQuery = "SELECT MAX(id) FROM watched";
+                    Statement statement = conn.createStatement();
+                    ResultSet rs2 = statement.executeQuery(selectIdQuery);
+                    int lastInsertedId = 0;
+                    if (rs2.next()) {
+                        lastInsertedId = rs2.getInt(1);
+                    }
+
+                    // Define the SQL query to insert the row into the destination table
+                    PreparedStatement ps2 = conn.prepareStatement("INSERT INTO watched (id, title, year, runtime, rating, genre, text, user) VALUES (?,?,?,?,?,?,?,?)");
+                    // Execute the insert query
+                    ps2.setInt(1, lastInsertedId + 1);
+                    ps2.setString(2, rs_title);
+                    ps2.setString(3, rs_year);
+                    ps2.setString(4, rs_runtime);
+                    ps2.setString(5, rs_rating);
+                    ps2.setString(6, rs_genre);
+                    ps2.setString(7, rs_text);
+                    ps2.setString(8, user);
+                    ps2.executeUpdate();
+                }
+
+            }
+
+            return MovieToSearch + " added!";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

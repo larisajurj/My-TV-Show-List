@@ -145,7 +145,7 @@ public class WantToWatchSceneController implements Initializable {
     public void moveToWatched(ActionEvent e){
         TvShowList selectedMovie = table_list.getSelectionModel().getSelectedItem();
         if (selectedMovie != null) {
-            statusLabel.setText("Watched: " +msc.addToWatched(msc.getActiveSession(), selectedMovie.getTitle()));
+            statusLabel.setText("Watched: " +msc.addToWatchedFromWantToWatch(msc.getActiveSession(), selectedMovie.getTitle()));
             msc.removeFromWantToWatch(msc.getActiveSession(), selectedMovie.getTitle());
         } else {
             statusLabel.setText("No movie selected.");
