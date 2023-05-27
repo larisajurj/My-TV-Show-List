@@ -3,3 +3,110 @@
     -fx-background-image: url('../images/background4.jpg');
 }
 
+#profile1{
+    -fx-graphic: url('../images/avatars/smallprofile1.png');
+    -fx-background-color: transparent;
+    -fx-background-size: 100%;
+}
+
+#profile1:pressed{
+    -fx-border-color: blue;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+#profile1:selected{
+    -fx-border-color: blue;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+#profile2{
+    -fx-graphic: url('../images/avatars/smallprofile2.png');
+    -fx-background-color: transparent;
+    -fx-background-size: 100%;
+}
+
+#profile2:pressed{
+    -fx-border-color: blue;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+#profile2:selected{
+    -fx-border-color: blue;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+#profile3{
+    -fx-graphic: url('../images/avatars/smallprofile3.png');
+    -fx-background-color: transparent;
+    -fx-background-size: 100%;
+}
+
+#profile3:pressed{
+    -fx-border-color: blue;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+#profile3:selected{
+    -fx-border-color: blue;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+#profile4{
+    -fx-graphic: url('../images/avatars/smallprofile4.png');
+    -fx-background-color: transparent;
+    -fx-background-size: 100%;
+}
+
+#profile4:pressed{
+    -fx-border-color: blue;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+#profile4:selected{
+    -fx-border-color: blue;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+#profile5{
+    -fx-graphic: url('../images/avatars/smallprofile5.png');
+    -fx-background-color: transparent;
+    -fx-background-size: 100%;
+}
+
+#profile5:pressed{
+    -fx-border-color: blue;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+#profile5:selected{
+    -fx-border-color: blue;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+#profile6{
+    -fx-graphic: url('../images/avatars/smallprofile6.png');
+    -fx-background-color: transparent;
+    -fx-background-size: 100%;
+}
+
+#profile6:pressed{
+    -fx-border-color: blue;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+#profile6:selected{
+    -fx-border-color: blue;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}

@@ -31,6 +31,11 @@
                   </Label>
             </HBox>
             <PasswordField fx:id="PasswordField" minHeight="36.0" minWidth="474.0" prefHeight="36.0" prefWidth="474.0" />
+         <Label fx:id="userLabel" textFill="RED">
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Label>
          <Label fx:id="loginMessageLabel" alignment="CENTER" prefHeight="26.0" prefWidth="522.0" textAlignment="CENTER" textFill="RED" wrapText="true">
             <font>
                <Font size="18.0" />
@@ -73,11 +78,11 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label text=" Sign up now!" textFill="#000dff">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
+            <Button mnemonicParsing="false" onAction="#goSignUp" style="-fx-background-color: transparent;" text="Sign Up now!" textFill="#0031ff">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>

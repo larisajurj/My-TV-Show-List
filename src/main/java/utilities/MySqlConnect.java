@@ -10,8 +10,8 @@ public class MySqlConnect {
     public static Connection ConnectDb() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/tvshowdb", "root", "");
-            //JOptionPane.showMessageDialog(null, "ConnectionEstablished");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/tvshowdb","root","");
+           // JOptionPane.showMessageDialog(null, "ConnectionEstablished");
             return conn;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
