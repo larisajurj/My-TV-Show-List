@@ -53,7 +53,7 @@ public class SignUpController {
         }
         if (canCreateAccount) {
             msc.insertUserInfo(enteredUsername, encryptedPassword, enteredFavQuote, profilePicture);
-            accountLabel.setText("Account created! Go back and log in.");
+            accountLabel.setText("Account created! Go back and log in." );
         }
     }
 
