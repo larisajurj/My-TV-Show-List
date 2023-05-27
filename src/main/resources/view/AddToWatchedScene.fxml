@@ -24,13 +24,14 @@
       </VBox>
       <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="799.0">
             <Button fx:id="plusButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="88.0" text="Add to list!" />
+      <Button mnemonicParsing="false" onAction="#goToCustom" prefHeight="26.0" prefWidth="118.0" text="Add custom show!" />
       <Label prefHeight="26.0" prefWidth="83.0" text="     Search box:" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-            <TextField fx:id="searchField" prefHeight="26.0" prefWidth="214.0" />
-      <Label fx:id="statusLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="410.0" textAlignment="CENTER" textFill="#078ba9">
+            <TextField fx:id="searchField" prefHeight="26.0" prefWidth="185.0" />
+      <Label fx:id="statusLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="293.0" textAlignment="CENTER" textFill="#078ba9">
          <font>
             <Font name="System Bold Italic" size="15.0" />
          </font>

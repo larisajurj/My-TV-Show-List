@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddCustomWatchedSceneController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="831.0" text="Add the details to your custom show!" textAlignment="CENTER" textFill="#feea06">
+         <font>
+            <Font name="Harlow Solid Italic" size="28.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+         <padding>
+            <Insets bottom="20.0" />
+         </padding>
+      </Label>
+      <HBox fx:id="titleLabel" prefHeight="26.0" prefWidth="600.0">
+         <children>
+            <Label text="Show Title:  ">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="titleField" prefHeight="26.0" prefWidth="498.0" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <HBox prefHeight="36.0" prefWidth="616.0">
+         <children>
+            <Label text="Release Year:  ">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="yearField" prefHeight="26.0" prefWidth="484.0" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <HBox prefHeight="26.0" prefWidth="600.0">
+         <children>
+            <Label text="Rating:  ">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="ratingField" prefHeight="26.0" prefWidth="524.0" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <HBox prefHeight="26.0" prefWidth="600.0">
+         <children>
+            <Label text="Genre:  ">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="genreField" prefHeight="26.0" prefWidth="526.0" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <HBox prefHeight="26.0" prefWidth="600.0">
+         <children>
+            <Label text="Episode duration: ">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="runtimeField" prefHeight="26.0" prefWidth="460.0" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <HBox prefHeight="26.0" prefWidth="600.0">
+         <children>
+            <Label text="Description:  ">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="descriptionField" prefHeight="26.0" prefWidth="492.0" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <Label fx:id="statusLabel" alignment="CENTER" contentDisplay="CENTER" text="Press the button to add!" textAlignment="CENTER">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <padding>
+            <Insets bottom="10.0" top="20.0" />
+         </padding>
+      </Label>
+      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addCustom" prefHeight="26.0" prefWidth="135.0" style="-fx-background-color: #feea06;" text="Add to list!" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</VBox>

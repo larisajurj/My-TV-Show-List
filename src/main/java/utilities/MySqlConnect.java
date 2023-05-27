@@ -300,4 +300,56 @@ public class MySqlConnect {
         }
         return null;
     }
+    public String addCustomTvShowToWatched(String user, String customTitle, String customYear, String customRuntime, String customRating, String customGenre, String customDescription){
+        try {
+            Connection conn = ConnectDb(); // Establish a connection to the database
+
+            if(customTitle.equals(""))
+                return "The title Field can not be null!";
+
+            String query = "SELECT * FROM watched WHERE title = ? and user= ?";
+
+            // Create a PreparedStatement object
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            // Set the parameter value for the ID
+            ps.setString(1, customTitle);
+            ps.setString(2, user);
+            // Execute the SELECT query
+            ResultSet rs = ps.executeQuery();
+
+            // Check if any result is returned
+            boolean idExists = rs.next();
+
+            if (idExists) {
+                return customTitle +  " is already in list!";
+            } else {
+
+                    String selectIdQuery = "SELECT MAX(id) FROM watched";
+                    Statement statement = conn.createStatement();
+                    ResultSet rs2 = statement.executeQuery(selectIdQuery);
+                    int lastInsertedId = 0;
+                    if (rs2.next()) {
+                        lastInsertedId = rs2.getInt(1);
+                    }
+
+                    // Define the SQL query to insert the row into the destination table
+                    PreparedStatement ps2 = conn.prepareStatement("INSERT INTO watched (id, title, year, runtime, rating, genre, text, user) VALUES (?,?,?,?,?,?,?,?)");
+                    // Execute the insert query
+                    ps2.setInt(1, lastInsertedId + 1);
+                    ps2.setString(2, customTitle);
+                    ps2.setString(3, customYear);
+                    ps2.setString(4, customRuntime);
+                    ps2.setString(5, customRating);
+                    ps2.setString(6, customGenre);
+                    ps2.setString(7, customDescription);
+                    ps2.setString(8, user);
+                    ps2.executeUpdate();
+                }
+            return customTitle + " added!";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
