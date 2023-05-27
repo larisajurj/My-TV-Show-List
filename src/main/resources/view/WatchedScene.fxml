@@ -75,6 +75,7 @@
             <HBox maxHeight="20.0" prefHeight="10.0" prefWidth="1015.0">
                <children>
                   <Button fx:id="plusButton" mnemonicParsing="false" onAction="#plusButton" prefHeight="66.0" prefWidth="102.0" text="+" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#minusButton" prefHeight="66.0" prefWidth="102.0" text="-" />
                   <Label prefHeight="26.0" prefWidth="101.0" text="Search by title:">
                      <font>
                         <Font name="System Bold Italic" size="12.0" />
@@ -92,6 +93,14 @@
                      </padding>
                   </Label>
                   <TextField fx:id="genreTextField" />
+                  <Label fx:id="statusLabel" contentDisplay="CENTER" layoutX="215.0" layoutY="10.0" prefHeight="26.0" prefWidth="359.0" text="status!">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
                </children>
             </HBox>
             <TableView fx:id="table_list" prefHeight="481.0" prefWidth="1062.0">

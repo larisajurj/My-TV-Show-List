@@ -84,7 +84,7 @@ public class AddToWatchedListController implements Initializable{
     }
     public void goToCustom(ActionEvent event){
         try {
-            FXMLLoader loaderWatched = new FXMLLoader(getClass().getClassLoader().getResource("view/AddCustomWatchedScene.fxml"));
+            FXMLLoader loaderWatched = new FXMLLoader(getClass().getClassLoader().getResource("view/AddCustomWantToWatchScene.fxml"));
             Parent layout = loaderWatched.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(layout);

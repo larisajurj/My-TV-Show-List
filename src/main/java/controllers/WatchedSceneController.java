@@ -52,6 +52,8 @@ public class WatchedSceneController implements Initializable{
     private Label quote;
     @FXML
     private ImageView avatar;
+    @FXML
+    private Label statusLabel;
 
     public void goToWantToWatchScene(ActionEvent event) {
         try {
@@ -126,5 +128,13 @@ public class WatchedSceneController implements Initializable{
         });
     }
 
-
+    public void minusButton(ActionEvent e){
+        TvShowList selectedMovie = table_list.getSelectionModel().getSelectedItem();
+        if (selectedMovie != null) {
+            //statusLabel.setText("Selected Movie: " + selectedMovie.getTitle());
+            statusLabel.setText(msc.removeFromWatched(msc.getActiveSession(), selectedMovie.getTitle()));
+        } else {
+            statusLabel.setText("No movie selected.");
+        }
+    }
 }

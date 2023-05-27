@@ -51,6 +51,8 @@ public class WantToWatchSceneController implements Initializable {
     private Label quote;
     @FXML
     private ImageView avatar;
+    @FXML
+    private Label statusLabel;
     public void goToWatchedScene(ActionEvent event) {
         try {
             FXMLLoader loaderWatched = new FXMLLoader(getClass().getClassLoader().getResource("view/WatchedScene.fxml"));
@@ -132,5 +134,21 @@ public class WantToWatchSceneController implements Initializable {
             });
         });
     }
-
+    public void minusButton(ActionEvent e){
+        TvShowList selectedMovie = table_list.getSelectionModel().getSelectedItem();
+        if (selectedMovie != null) {
+            statusLabel.setText(msc.removeFromWantToWatch(msc.getActiveSession(), selectedMovie.getTitle()));
+        } else {
+            statusLabel.setText("No movie selected.");
+        }
+    }
+    public void moveToWatched(ActionEvent e){
+        TvShowList selectedMovie = table_list.getSelectionModel().getSelectedItem();
+        if (selectedMovie != null) {
+            statusLabel.setText("Watched: " +msc.addToWatched(msc.getActiveSession(), selectedMovie.getTitle()));
+            msc.removeFromWantToWatch(msc.getActiveSession(), selectedMovie.getTitle());
+        } else {
+            statusLabel.setText("No movie selected.");
+        }
+    }
 }
