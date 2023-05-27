@@ -18,6 +18,10 @@
             <id>gluonhq</id>
             <url>https://nexus.gluonhq.com/nexus/content/repositories/releases</url>
         </repository>
+        <repository>
+            <id>testfx</id>
+            <url>http://dl.bintray.com/testfx/testfx</url>
+        </repository>
     </repositories>
 
 
@@ -63,6 +67,31 @@
             <groupId>com.gluonhq</groupId>
             <artifactId>charm-glisten</artifactId>
             <version>6.2.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>21-ea+5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-core</artifactId>
+            <version>4.0.16-alpha</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.0-M1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

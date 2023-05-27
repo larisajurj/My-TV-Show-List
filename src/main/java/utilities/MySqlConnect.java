@@ -52,34 +52,49 @@ public class MySqlConnect {
         }
         return list;
     }
-
-    public static void insertUserInfo(String username, String password, String favoriteQuote) {
+    public void insertUserInfo(String username, String password, String favoriteQuote, String profilePicture) {
         Connection conn = ConnectDb();
         try {
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO user_table (user, password, favQuote, profilePic) VALUES (?, ?, ?)");
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO user_table (user, password, favQuote, profilePic) VALUES (?, ?, ?, ?)");
             ps.setString(1, username);
             ps.setString(2, password);
             ps.setString(3, favoriteQuote);
+            ps.setString(4, profilePicture);
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "User information inserted successfully!");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    public static ObservableList<UserNameList> getUserInfo() {
+    public boolean checkUsername(String username){
         Connection conn = ConnectDb();
-        ObservableList<UserNameList> list = FXCollections.observableArrayList();
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT user, password, favQuote, profilePic FROM user_table");
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new UserNameList(rs.getString("user"), rs.getString("password"), rs.getString("favQuote"), rs.getInt("profilePic")));
+            PreparedStatement ps = conn.prepareStatement("Select user from user_table where user = ?");
+            ps.setString(1, username);
+            ResultSet resultSet = ps.executeQuery();
+            // Iterate over the result set
+            while (resultSet.next()) {
+                // Retrieve the column values from the result set
+                return username.equals(resultSet.getString("user"));
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return list;
+        return false;
+    }
+
+    public boolean checkPassword(String password, String username) {
+        Connection conn = ConnectDb();
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT password from user_table where user = ?");
+            ps.setString(1, username);
+            ResultSet resultSet = ps.executeQuery();
+            while(resultSet.next()) {
+                return password.equals(resultSet.getString("password"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public String addToWantToWatch(String user, String MovieToSearch) {
