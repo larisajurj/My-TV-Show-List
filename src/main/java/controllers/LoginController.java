@@ -14,7 +14,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import utilities.EncryptPassword;
 import utilities.MySqlConnect;
-import utilities.UserNameList;
 import java.io.IOException;
 
 public class LoginController {
@@ -66,8 +65,6 @@ public class LoginController {
         }
     }
 
-
-    }
 
     public void goSignUp(ActionEvent event) {
         try {
