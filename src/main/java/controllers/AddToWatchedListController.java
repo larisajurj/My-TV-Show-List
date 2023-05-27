@@ -12,7 +12,7 @@ import utilities.TvShowList;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddToListController implements Initializable{
+public class AddToWatchedListController implements Initializable{
     private String username;
     @FXML
     private TableView<TvShowList> table_list;
@@ -49,7 +49,7 @@ public class AddToListController implements Initializable{
             TvShowList selectedMovie = table_list.getSelectionModel().getSelectedItem();
             if (selectedMovie != null) {
                 //System.out.println("Selected Movie: " + selectedMovie.getTitle());
-                statusLabel.setText(msc.addToWantToWatch(msc.getActiveSession(), selectedMovie.getTitle()));
+                statusLabel.setText(msc.addToWatched(msc.getActiveSession(), selectedMovie.getTitle()));
             } else {
                 statusLabel.setText("No movie selected.");
             }

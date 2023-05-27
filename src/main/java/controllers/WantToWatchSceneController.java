@@ -12,6 +12,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.w3c.dom.Text;
 import utilities.MySqlConnect;
@@ -45,6 +47,10 @@ public class WantToWatchSceneController implements Initializable {
     private TextField genreTextField;
     @FXML
     private TextField titleTextField;
+    @FXML
+    private Label quote;
+    @FXML
+    private ImageView avatar;
     public void goToWatchedScene(ActionEvent event) {
         try {
             FXMLLoader loaderWatched = new FXMLLoader(getClass().getClassLoader().getResource("view/WatchedScene.fxml"));
@@ -67,6 +73,8 @@ public class WantToWatchSceneController implements Initializable {
             stage = new Stage();
             stage.setTitle("Add to list!");
             scene = new Scene(layout);
+            Image icon = new Image("images/icon.png");
+            stage.getIcons().add(icon);
             String css = this.getClass().getClassLoader().getResource("css/Style.css").toExternalForm();
             scene.getStylesheets().add(css);
             stage.setScene(scene);
@@ -79,7 +87,11 @@ public class WantToWatchSceneController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         msc = new MySqlConnect();
         String username = msc.getActiveSession();
-        usernameLabel.setText(username);
+        usernameLabel.setText("@"+username);
+        quote.setText(msc.getFavouriteQuote(username));
+        String pathToImage = "images/avatars/profile" + msc.getProfilePic(username) + ".png";
+        Image profile = new Image(pathToImage);
+        avatar.setImage(profile);
         ObservableList<TvShowList> listM = MySqlConnect.getWantToWatchData(username);
         col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
         col_year.setCellValueFactory(new PropertyValueFactory<>("year"));

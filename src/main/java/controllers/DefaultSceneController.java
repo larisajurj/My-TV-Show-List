@@ -8,10 +8,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import utilities.MySqlConnect;
 import utilities.UserSession;
+import javafx.scene.image.Image;
 
+
+import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -20,6 +24,10 @@ public class DefaultSceneController implements Initializable{
     private Scene scene;
     @FXML
     private Label usernameLabel;
+    @FXML
+    private Label quote;
+    @FXML
+    private ImageView avatar;
 
     public void goToWantToWatchScene(ActionEvent event) {
         try {
@@ -54,6 +62,13 @@ public class DefaultSceneController implements Initializable{
         @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         MySqlConnect msc = new MySqlConnect();
-        usernameLabel.setText(msc.getActiveSession());
+        String username = msc.getActiveSession();
+        usernameLabel.setText("@"+username);
+        //System.out.println(msc.getProfilePic(username));
+        quote.setText(msc.getFavouriteQuote(username));
+        String pathToImage = "images/avatars/profile" + msc.getProfilePic(username) + ".png";
+        Image profile = new Image(pathToImage);
+        avatar.setImage(profile);
+
     }
 }

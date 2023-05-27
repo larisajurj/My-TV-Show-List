@@ -32,9 +32,7 @@ public class LoginController{
         String enteredPassword = PasswordField.getText();
         String encryptedPassword = encryptPassword.encrypt(enteredPassword);
 
-        // Retrieve the user information from the database
-        MySqlConnect msc = new MySqlConnect();
-        //MySqlConnect msc = new MySqlConnect();
+        // Retrieve the user information from the database//MySqlConnect msc = new MySqlConnect();
         ObservableList<UserNameList> userList = MySqlConnect.getUserInfo();
 
         // Check if the entered username and password match any user in the database
