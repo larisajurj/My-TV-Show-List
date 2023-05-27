@@ -2,6 +2,7 @@ package controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,18 +10,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.w3c.dom.Text;
 import utilities.MySqlConnect;
 import utilities.TvShowList;
 
-import javax.xml.transform.Result;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.*;
 
 public class WantToWatchSceneController implements Initializable {
@@ -40,14 +39,24 @@ public class WantToWatchSceneController implements Initializable {
     private TableColumn<TvShowList, String> col_genre;
     @FXML
     private TableColumn<TvShowList, String> col_description;
-    //int index = -1;
-    //Connection conn = null;
-    //ResultSet rs = null;
-    //PreparedStatement pst = null;
-
+    @FXML
+    private Label usernameLabel;
+    private MySqlConnect msc;
+    private FilteredList<TvShowList> filteredData;
+    @FXML
+    private TextField genreTextField;
+    @FXML
+    private TextField titleTextField;
+    @FXML
+    private Label quote;
+    @FXML
+    private ImageView avatar;
+    @FXML
+    private Label statusLabel;
     public void goToWatchedScene(ActionEvent event) {
         try {
-            Parent layout = FXMLLoader.load(getClass().getClassLoader().getResource("view/WatchedScene.fxml"));
+            FXMLLoader loaderWatched = new FXMLLoader(getClass().getClassLoader().getResource("view/WatchedScene.fxml"));
+            Parent layout = loaderWatched.load();
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(layout);
             String css = this.getClass().getClassLoader().getResource("css/Style.css").toExternalForm();
@@ -58,34 +67,88 @@ public class WantToWatchSceneController implements Initializable {
             e.printStackTrace();
         }
     }
+    public void plusButton(ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/AddToListScene.fxml"));
+            Parent layout = loader.load();
 
-    /*@Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        //listM = MySqlConnect.getDataShows();
-        //ObservableList<TvShowList> listM= FXCollections.observableArrayList(new TvShowList("title1", "2002", "1", "10", "comedy", "bla la"));
-
-        col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
-        col_year.setCellValueFactory(new PropertyValueFactory<>("year"));
-        col_runtime.setCellValueFactory(new PropertyValueFactory<>("runtime"));
-        col_rating.setCellValueFactory(new PropertyValueFactory<>("rating"));
-        col_genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
-        col_description.setCellValueFactory(new PropertyValueFactory<>("text"));
-        table_list.setItems(listM);
-
-    }*/
+            stage = new Stage();
+            stage.setTitle("Add to list!");
+            scene = new Scene(layout);
+            Image icon = new Image("images/icon.png");
+            stage.getIcons().add(icon);
+            String css = this.getClass().getClassLoader().getResource("css/Style.css").toExternalForm();
+            scene.getStylesheets().add(css);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        MySqlConnect msc = new MySqlConnect();
-        ObservableList<TvShowList> listM = MySqlConnect.getDataShows();
+        msc = new MySqlConnect();
+        String username = msc.getActiveSession();
+        usernameLabel.setText("@"+username);
+        quote.setText(msc.getFavouriteQuote(username));
+        String pathToImage = "images/avatars/profile" + msc.getProfilePic(username) + ".png";
+        Image profile = new Image(pathToImage);
+        avatar.setImage(profile);
+        ObservableList<TvShowList> listM = MySqlConnect.getWantToWatchData(username);
         col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
         col_year.setCellValueFactory(new PropertyValueFactory<>("year"));
         col_runtime.setCellValueFactory(new PropertyValueFactory<>("duration"));
         col_rating.setCellValueFactory(new PropertyValueFactory<>("rating"));
         col_genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
         col_description.setCellValueFactory(new PropertyValueFactory<>("text"));
-       // msc.addToWantToWatch("nume", 3);
-
         table_list.setItems(listM);
-    }
+        ObservableList<TvShowList> dataList = table_list.getItems();
+        filteredData = new FilteredList<>(dataList, p -> true);
 
+        // Bind the filtered data to the table view
+        table_list.setItems(filteredData);
+
+        // Add a listener to the search field text property
+       titleTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(tvShow -> {
+                // If search field is empty, show all items
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare the title with the search query (case-insensitive)
+                String lowerCaseQuery = newValue.toLowerCase();
+                return tvShow.getTitle().toLowerCase().contains(lowerCaseQuery);
+            });
+        });
+        genreTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(tvShow -> {
+                // If search field is empty, show all items
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare the title with the search query (case-insensitive)
+                String lowerCaseQuery = newValue.toLowerCase();
+                return tvShow.getGenre().toLowerCase().contains(lowerCaseQuery);
+            });
+        });
+    }
+    public void minusButton(ActionEvent e){
+        TvShowList selectedMovie = table_list.getSelectionModel().getSelectedItem();
+        if (selectedMovie != null) {
+            statusLabel.setText(msc.removeFromWantToWatch(msc.getActiveSession(), selectedMovie.getTitle()));
+        } else {
+            statusLabel.setText("No movie selected.");
+        }
+    }
+    public void moveToWatched(ActionEvent e){
+        TvShowList selectedMovie = table_list.getSelectionModel().getSelectedItem();
+        if (selectedMovie != null) {
+            statusLabel.setText("Watched: " +msc.addToWatchedFromWantToWatch(msc.getActiveSession(), selectedMovie.getTitle()));
+            msc.removeFromWantToWatch(msc.getActiveSession(), selectedMovie.getTitle());
+        } else {
+            statusLabel.setText("No movie selected.");
+        }
+    }
 }

@@ -11,11 +11,17 @@
 <?import javafx.scene.text.Font?>
 
 <?import javafx.scene.effect.DropShadow?>
+
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
 <SplitPane dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="737.0" prefWidth="1422.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WatchedSceneController">
-  <items>
-      <VBox alignment="TOP_CENTER" prefHeight="398.0" prefWidth="177.0" spacing="10">
+   <items>
+      <VBox alignment="TOP_CENTER" prefHeight="737.0" prefWidth="344.0" spacing="10">
          <children>
-            <ImageView fitHeight="217.0" fitWidth="207.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="avatar" fitHeight="217.0" fitWidth="207.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/icon.png" />
                </image>
@@ -23,7 +29,7 @@
                   <Insets top="50.0" />
                </VBox.margin>
             </ImageView>
-            <Label text="\@username">
+            <Label fx:id="usernameLabel" text="\@username">
                <font>
                   <Font size="23.0" />
                </font>
@@ -33,7 +39,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label alignment="TOP_CENTER" prefHeight="106.0" prefWidth="322.0" text="Perfectly balanced, as all things should be" textOverrun="CLIP" wrapText="true">
+            <Label fx:id="quote" alignment="TOP_LEFT" prefHeight="106.0" prefWidth="322.0" text="Perfectly balanced, as all things should be" textOverrun="CLIP" wrapText="true">
                <font>
                   <Font name="System Italic" size="24.0" />
                </font>
@@ -43,7 +49,7 @@
                   <Font size="27.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" prefHeight="48.0" prefWidth="275.0" text="Want to watch" onAction="#goToWantToWatchScene" textAlignment="JUSTIFY">
+            <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" prefHeight="48.0" prefWidth="275.0" text="Want to watch"  onAction="#goToWantToWatchScene" textAlignment="JUSTIFY">
                <font>
                   <Font size="27.0" />
                </font>
@@ -52,26 +58,62 @@
          <opaqueInsets>
             <Insets />
          </opaqueInsets></VBox>
-      <BorderPane prefHeight="200.0" prefWidth="200.0">
-         <top>
-            <Label text="Watched!" textFill="#ffea06" BorderPane.alignment="CENTER">
-               <font>
-                  <Font name="Harlow Solid Italic" size="78.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-               <BorderPane.margin>
-                  <Insets top="100.0" />
-               </BorderPane.margin>
-            </Label>
-         </top>
-         <center>
-            <Label alignment="TOP_CENTER" contentDisplay="TOP" text="Please select which list do you want to view :)" textAlignment="CENTER" textFill="#c9c8c8" BorderPane.alignment="TOP_CENTER">
-               <font>
-                  <Font size="41.0" />
-               </font>
-            </Label>
-         </center></BorderPane>
-  </items>
+      <SplitPane dividerPositions="0.15, 0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+         <items>
+            <Pane maxHeight="120.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="98.0" prefWidth="1013.0" text="Watched!" textFill="#faea5f">
+                     <font>
+                        <Font name="Harlow Solid Italic" size="58.0" />
+                     </font>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </Label>
+               </children>
+            </Pane>
+            <HBox maxHeight="20.0" prefHeight="10.0" prefWidth="1015.0">
+               <children>
+                  <Button fx:id="plusButton" mnemonicParsing="false" onAction="#plusButton" prefHeight="66.0" prefWidth="102.0" text="+" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#minusButton" prefHeight="66.0" prefWidth="102.0" text="-" />
+                  <Label prefHeight="26.0" prefWidth="101.0" text="Search by title:">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding></Label>
+                  <TextField fx:id="titleTextField" prefHeight="26.0" prefWidth="137.0" />
+                  <Label prefHeight="26.0" prefWidth="109.0" text="Search by genre:">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="genreTextField" />
+                  <Label fx:id="statusLabel" contentDisplay="CENTER" layoutX="215.0" layoutY="10.0" prefHeight="26.0" prefWidth="359.0" text="status!">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <TableView fx:id="table_list" prefHeight="481.0" prefWidth="1062.0">
+               <columns>
+                  <TableColumn fx:id="col_title" prefWidth="267.99998779296857" text="title" />
+                  <TableColumn fx:id="col_year" prefWidth="77.5999755859375" text="year" />
+                  <TableColumn fx:id="col_runtime" prefWidth="75.99996948242188" text="runtime" />
+                  <TableColumn fx:id="col_rating" prefWidth="69.5999755859375" text="rating" />
+                  <TableColumn fx:id="col_genre" prefWidth="116.0" text="genre" />
+                  <TableColumn fx:id="col_description" prefWidth="457.60003662109375" text="description" />
+               </columns>
+            </TableView>
+         </items>
+      </SplitPane>
+   </items>
 </SplitPane>

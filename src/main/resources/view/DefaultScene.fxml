@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -13,23 +14,23 @@
 
 <SplitPane dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="737.0" prefWidth="1422.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DefaultSceneController">
       <VBox alignment="TOP_CENTER" prefHeight="398.0" prefWidth="177.0" spacing="10">
-            <ImageView fitHeight="217.0" fitWidth="207.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="avatar" fitHeight="217.0" fitWidth="207.0" pickOnBounds="true" preserveRatio="true">
                   <Image url="@../images/icon.png" />
                <VBox.margin>
                   <Insets top="50.0" />
                </VBox.margin>
             </ImageView>
-            <Label text="\@username">
-               <font>
+          <Label fx:id="usernameLabel" text="\@username">
+              <font>
                   <Font size="23.0" />
-               </font>
-            </Label>
-            <Label alignment="BOTTOM_LEFT" prefHeight="55.0" prefWidth="322.0" text="Favourite quote:">
-               <font>
+              </font>
+          </Label>
+          <Label alignment="BOTTOM_LEFT" prefHeight="55.0" prefWidth="322.0" text="Favourite quote:">
+              <font>
                   <Font size="24.0" />
-               </font>
-            </Label>
-            <Label alignment="TOP_CENTER" prefHeight="106.0" prefWidth="322.0" text="Perfectly balanced, as all things should be" textOverrun="CLIP" wrapText="true">
+              </font>
+          </Label>
+            <Label fx:id="quote" alignment="TOP_LEFT" prefHeight="106.0" prefWidth="322.0" text="Perfectly balanced, as all things should be" textOverrun="CLIP" wrapText="true">
                <font>
                   <Font name="System Italic" size="24.0" />
                </font>
